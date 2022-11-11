@@ -1,7 +1,11 @@
 package com.ithuipu.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.ithuipu.dao.CheckItemDao;
+import com.ithuipu.entity.PageResult;
+import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.CheckItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,5 +28,14 @@ public class CheckItemServiceImpl implements CheckItemService{
     @Override
     public void add(CheckItem checkItem) {
         checkItemDao.add(checkItem);
+    }
+
+    @Override
+    public PageResult findByPageAndQuery(QueryPageBean queryPageBean) {
+        //1.设置分页
+        PageHelper.startPage(queryPageBean.getCurrentPage(), queryPageBean.getPageSize());
+        //2.
+        Page<CheckItem> page = checkItemDao.selectCheckItemByQuery(queryPageBean.getQueryString());
+        return new PageResult(page.getTotal(),page.getResult());
     }
 }

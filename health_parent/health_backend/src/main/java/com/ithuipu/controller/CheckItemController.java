@@ -9,6 +9,8 @@ package com.ithuipu.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ithuipu.constant.MessageConstant;
+import com.ithuipu.entity.PageResult;
+import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.entity.Result;
 import com.ithuipu.pojo.CheckItem;
 import com.ithuipu.service.CheckItemService;
@@ -43,5 +45,13 @@ public class CheckItemController {
         }
         return new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
 
+    }
+
+    /** 2.分页条件查询*/
+    @RequestMapping("/findByPage")
+    public PageResult findByPageAndQuery(@RequestBody QueryPageBean queryPageBean){
+        //1.调用service---dao
+        PageResult pageResult = checkItemService.findByPageAndQuery(queryPageBean);
+        return pageResult;
     }
 }
