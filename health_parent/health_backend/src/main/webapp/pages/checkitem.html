@@ -322,6 +322,31 @@
         methods: {
             //编辑
             handleEdit() {
+                this.$refs['dataEditForm'].validate((valid)=>{
+                    //判断
+                    if(valid){
+                        //1.关闭添加窗口
+                        this.dialogFormVisible4Edit = false;
+                        //2.异步发送请求
+                        //2.异步发送请求
+                        axios.post("/checkitem/edit.do", this.formData).then((response) => {
+                            //判断后台传递的参数--flag--true --添加成功
+                            if (response.data.flag) {
+                                this.$message({
+                                    message: response.data.message,
+                                    type: 'success'
+                                });
+                            } else {
+                                this.$message.error(response.data.message);
+                            }
+                        }).finally(() => {
+                            //不管添加是否成功,最终展示的就是查询
+                            this.findPage();
+                        })
+                    } else {
+                        this.$message.error('表单数据校验失败');
+                    }
+                })
             },
             //添加
             handleAdd() {
@@ -383,6 +408,10 @@
             },
             // 弹出编辑窗口
             handleUpdate(row) {
+                //弹出窗口
+                this.dialogFormVisible4Edit = true;
+                //数据的回显
+                this.formData = row;
             },
             //切换页码
             handleCurrentChange(currentPage) {

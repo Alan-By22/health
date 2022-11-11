@@ -44,7 +44,6 @@ public class CheckItemController {
             return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
         }
         return new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
-
     }
 
     /**
@@ -66,14 +65,25 @@ public class CheckItemController {
         try {
             checkItemService.delete(id);
         } catch (RuntimeException e) {
-            return new Result(false,e.getMessage());
-        }
-        catch (Exception e) {
+            return new Result(false, e.getMessage());
+        } catch (Exception e) {
             return new Result(false, MessageConstant.DELETE_CHECKITEM_FAIL);
         }
         return new Result(true, MessageConstant.DELETE_CHECKITEM_SUCCESS);
-
     }
 
+    /**
+     * 4.修改
+     * /checkitem/edit.do
+     * */
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody CheckItem checkItem) {
+        try {
+            checkItemService.edit(checkItem);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.EDIT_CHECKITEM_FAIL);
+        }
+        return new Result(true, MessageConstant.EDIT_CHECKITEM_SUCCESS);
+    }
 
 }

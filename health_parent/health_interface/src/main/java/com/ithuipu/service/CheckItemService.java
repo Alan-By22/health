@@ -24,4 +24,7 @@ public interface CheckItemService {
 
     /**根据id删除*/
     void delete(Integer id);
+
+    /**编辑*/
+    void edit(CheckItem checkItem);
 }

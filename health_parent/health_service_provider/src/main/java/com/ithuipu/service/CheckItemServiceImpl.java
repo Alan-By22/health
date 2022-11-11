@@ -62,4 +62,12 @@ public class CheckItemServiceImpl implements CheckItemService {
         //3
         checkItemDao.deleteById(id);
     }
+
+    /**
+     * 编辑
+     */
+    @Override
+    public void edit(CheckItem checkItem) {
+        checkItemDao.edit(checkItem);
+    }
 }
