@@ -47,11 +47,33 @@ public class CheckItemController {
 
     }
 
-    /** 2.分页条件查询*/
+    /**
+     * 2.分页条件查询
+     */
     @RequestMapping("/findByPage")
-    public PageResult findByPageAndQuery(@RequestBody QueryPageBean queryPageBean){
+    public PageResult findByPageAndQuery(@RequestBody QueryPageBean queryPageBean) {
         //1.调用service---dao
         PageResult pageResult = checkItemService.findByPageAndQuery(queryPageBean);
         return pageResult;
     }
+
+    /**
+     * 3.删除
+     * //checkitem/deleteById.do?id=28
+     */
+    @RequestMapping("/deleteById")
+    public Result delete(Integer id) {
+        try {
+            checkItemService.delete(id);
+        } catch (RuntimeException e) {
+            return new Result(false,e.getMessage());
+        }
+        catch (Exception e) {
+            return new Result(false, MessageConstant.DELETE_CHECKITEM_FAIL);
+        }
+        return new Result(true, MessageConstant.DELETE_CHECKITEM_SUCCESS);
+
+    }
+
+
 }

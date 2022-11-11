@@ -15,8 +15,19 @@ public interface CheckItemDao {
      * 新增
      */
     void add(CheckItem checkItem);
+
     /**
      * 分页查询
      */
     Page<CheckItem> selectCheckItemByQuery(String queryString);
+
+    /**
+     * 查询有没有关联
+     */
+    long findCountByCheckItemId(Integer id);
+
+    /**
+     * 根据id来删除有没有检查项
+     */
+    void deleteById(Integer id);
 }

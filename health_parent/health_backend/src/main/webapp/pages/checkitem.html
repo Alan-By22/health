@@ -342,7 +342,7 @@
                             } else {
                                 this.$message.error(response.data.message);
                             }
-                        }).finally(()=>{
+                        }).finally(() => {
                             //不管添加是否成功,最终展示的就是查询
                             this.findPage();
                         })
@@ -352,22 +352,22 @@
                 })
             },
             //点击查询按钮跳转第一页
-            findPage_1(){
-                this.pagination.currentPage= 1
+            findPage_1() {
+                this.pagination.currentPage = 1
                 this.findPage();
             },
             //分页查询
             findPage() {
                 //1.封装向后台发送的数据
-                let param={
-                    currentPage:this.pagination.currentPage,//页码
-                    pageSize:this.pagination.pageSize,//每页显示的记录数
-                    queryString:this.pagination.queryString//查询条件
+                let param = {
+                    currentPage: this.pagination.currentPage,//页码
+                    pageSize: this.pagination.pageSize,//每页显示的记录数
+                    queryString: this.pagination.queryString//查询条件
                 }
                 //2.发送异步请求
-                axios.post("/checkitem/findByPage.do",param).then((response)=>{
+                axios.post("/checkitem/findByPage.do", param).then((response) => {
                     //获取响应的数据
-                    this.pagination.total=response.data.total;
+                    this.pagination.total = response.data.total;
                     this.dataList = response.data.rows
                 })
             },
@@ -386,11 +386,38 @@
             },
             //切换页码
             handleCurrentChange(currentPage) {
-                this.pagination.currentPage=currentPage;
+                this.pagination.currentPage = currentPage;
                 this.findPage();
             },
             // 删除
             handleDelete(row) {
+                /*console.log(row)
+                alert(row.id)*/
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //确认删除
+                    axios.get("/checkitem/deleteById.do?id=" + row.id).then((response) => {
+                        if (response.data.flag) {
+                            this.$message({
+                                type: 'success',
+                                message: response.data.message
+                            });
+                            //删除成功后在查询一次
+                            this.findPage()
+                        } else {
+                            this.$message.error(response.data.message);
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+
             },
         },
     });

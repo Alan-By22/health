@@ -21,4 +21,7 @@ public interface CheckItemService {
      * 分页查询
      */
     PageResult findByPageAndQuery(QueryPageBean queryPageBean);
+
+    /**根据id删除*/
+    void delete(Integer id);
 }
