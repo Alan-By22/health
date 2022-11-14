@@ -1,8 +1,13 @@
 package com.ithuipu.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.ithuipu.dao.CheckGroupDao;
+import com.ithuipu.entity.PageResult;
+import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.CheckGroup;
+import com.ithuipu.pojo.CheckItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,13 +43,23 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     private void setCheckGroup_CheckItem(Integer checkgroup_id, Integer[] checkitemIds) {
         if (checkitemIds != null && checkitemIds.length > 0) {
             for (Integer checkitemId : checkitemIds) {
-                Map<String,Integer> map = new HashMap<>();
-                map.put("checkgroup_id",checkgroup_id);
-                map.put("checkitem_id",checkitemId);
+                Map<String, Integer> map = new HashMap<>();
+                map.put("checkgroup_id", checkgroup_id);
+                map.put("checkitem_id", checkitemId);
                 //添加
                 checkGroupDao.checkGroupAndCheckItem(map);
             }
         }
     }
-
+    /**
+     * 分页查询
+     */
+    @Override
+    public PageResult findByPage(QueryPageBean queryPageBean) {
+        //1.设置分页
+        PageHelper.startPage(queryPageBean.getCurrentPage(), queryPageBean.getPageSize());
+        //2.查询
+        Page<CheckGroup> page = checkGroupDao.findByPage(queryPageBean.getQueryString());
+        return new PageResult(page.getTotal(), page.getResult());
+    }
 }

@@ -1,5 +1,6 @@
 package com.ithuipu.dao;
 
+import com.github.pagehelper.Page;
 import com.ithuipu.pojo.CheckGroup;
 
 import java.util.Map;
@@ -22,5 +23,8 @@ public interface CheckGroupDao {
      */
     void checkGroupAndCheckItem(Map<String, Integer> map);
 
-
+    /**
+     * 分页查询
+     */
+    Page<CheckGroup> findByPage(String queryString);
 }

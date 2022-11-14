@@ -44,7 +44,7 @@ public class CheckItemServiceImpl implements CheckItemService {
     public PageResult findByPageAndQuery(QueryPageBean queryPageBean) {
         //1.设置分页
         PageHelper.startPage(queryPageBean.getCurrentPage(), queryPageBean.getPageSize());
-        //2.
+        //2.查询
         Page<CheckItem> page = checkItemDao.selectCheckItemByQuery(queryPageBean.getQueryString());
         return new PageResult(page.getTotal(), page.getResult());
     }

@@ -16,4 +16,11 @@
         insert into t_checkgroup_checkitem (checkgroup_id, checkitem_id)
         values (#{checkgroup_id}, #{checkitem_id});
     </insert>
+    <!--分页条件查询-->
+    <select id="findByPage" parameterType="string" resultType="com.ithuipu.pojo.CheckGroup">
+        select * from t_checkgroup
+        <if test="value !=null and value.length > 0">
+            where code = #{value} or name = #{value} or helpCode = #{value}
+        </if>
+    </select>
 </mapper>
