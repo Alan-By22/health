@@ -370,6 +370,24 @@
         methods: {
             //编辑
             handleEdit() {
+                //异步发送数据
+                axios.post("/checkgroup/edit.do?checkitemIds" + this.checkitemIds, this.formData)
+                    .then((response) => {
+                        //关闭编辑窗口
+                        this.dialogFormVisible4Edit = false;
+                        if (response.data.flag) {
+                            this.$message({
+                                message: response.data.message,
+                                type: 'success'
+                            })
+                        } else {
+                            //编辑失败
+                            this.$message.error(response.data.message);
+                        }
+                    }).finally(() => {
+                    //不管编辑是否成功,最终展示的就是查询
+                    this.findPage();
+                })
             },
             //添加
             handleAdd() {
@@ -438,6 +456,32 @@
             },
             // 弹出编辑窗口
             handleUpdate(row) {
+                //弹出窗口
+                this.dialogFormVisible4Edit = true;
+                //默认打开的时候选择基本信息选项卡
+                this.activeName = "first";
+                //数据的回显
+                this.formData = row;
+                //异步请求加载所有的检查项
+                axios.get("/checkitem/findAll.do").then((response) => {
+                    if (response.data.flag) {
+                        //数据的绑定
+                        this.tableData = response.data.data;
+                        //查询当前的检查组包含的所有检查项id,用于页面的回显
+                        axios.get("/checkitem/findCheckItemIdsByCheckGroupId.do?id=" + row.id).then((response) => {
+                            //为模型数据赋值,把钩打上
+                            if (response.data.flag){
+                                this.checkitemIds = response.data.data;
+                            }else{
+                                this.$message.error(response.data.message);
+                            }
+                        });
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
+                })
+                //修改完后重新查一次
+                this.findPage();
             },
             //切换页码
             handleCurrentChange(currentPage) {

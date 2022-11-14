@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -29,7 +31,7 @@ public class CheckGroupController {
     private CheckGroupService checkGroupService;
 
     /**
-     * 新增
+     * 1.新增
      */
     @RequestMapping("/add")
     public Result add(@RequestBody CheckGroup checkGroup, Integer[] checkitemIds) {
@@ -50,5 +52,35 @@ public class CheckGroupController {
     public PageResult findByPageAndQuery(@RequestBody QueryPageBean queryPageBean) {
         //1.调用service---dao
         return checkGroupService.findByPage(queryPageBean);
+    }
+
+    /**
+     * 3.查询ids
+     */
+    @RequestMapping("/findCheckItemIdsByCheckGroupId")
+    public Result findCheckItemIdsByCheckGroupId(Integer id) {
+        try {
+            List<Integer> ids = checkGroupService.findCheckItemIdsByCheckGroupId(id);
+            //新增成功
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_FAIL, ids);
+        } catch (Exception e) {
+            //新增失败
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_SUCCESS);
+        }
+    }
+
+    /**
+     * 4.编辑
+     */
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody CheckGroup checkGroup,Integer[] checkItemIds) {
+        try {
+            checkGroupService.edit(checkGroup,checkItemIds);
+        } catch (Exception e) {
+            //编辑失败
+            return new Result(false, MessageConstant.EDIT_CHECKGROUP_FAIL);
+        }
+        //编辑成功
+        return new Result(true, MessageConstant.EDIT_CHECKGROUP_SUCCESS);
     }
 }

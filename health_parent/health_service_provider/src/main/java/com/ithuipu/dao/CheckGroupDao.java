@@ -3,6 +3,7 @@ package com.ithuipu.dao;
 import com.github.pagehelper.Page;
 import com.ithuipu.pojo.CheckGroup;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,4 +28,19 @@ public interface CheckGroupDao {
      * 分页查询
      */
     Page<CheckGroup> findByPage(String queryString);
+
+    /**
+     * 查询ids
+     */
+    List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+
+    /**
+     * 修改
+     */
+    void edit(CheckGroup checkGroup);
+
+    /**
+     * 清理
+     */
+    void deleteByGroupId(CheckGroup checkGroup);
 }

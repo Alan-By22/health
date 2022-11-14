@@ -412,6 +412,8 @@
                 this.dialogFormVisible4Edit = true;
                 //数据的回显
                 this.formData = row;
+                //修改完后重新查一次
+                this.findPage();
             },
             //切换页码
             handleCurrentChange(currentPage) {

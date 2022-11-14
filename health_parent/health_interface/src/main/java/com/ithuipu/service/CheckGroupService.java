@@ -5,6 +5,8 @@ import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.CheckGroup;
 import com.ithuipu.pojo.CheckItem;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -14,10 +16,21 @@ import com.ithuipu.pojo.CheckItem;
 
 public interface CheckGroupService {
 
-    /**新增*/
+    /**
+     * 新增
+     */
     void add(CheckGroup checkGroup, Integer[] checkitemIds);
+
     /**
      * 分页查询
      */
     PageResult findByPage(QueryPageBean queryPageBean);
+
+    /**查询ids*/
+    List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+
+    /**
+     * 编辑
+     */
+    void edit(CheckGroup checkGroup, Integer[] checkItemIds);
 }
