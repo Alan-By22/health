@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author 11752
  * 检查项  json
@@ -75,7 +77,7 @@ public class CheckItemController {
     /**
      * 4.修改
      * /checkitem/edit.do
-     * */
+     */
     @RequestMapping("/edit")
     public Result edit(@RequestBody CheckItem checkItem) {
         try {
@@ -84,6 +86,20 @@ public class CheckItemController {
             return new Result(false, MessageConstant.EDIT_CHECKITEM_FAIL);
         }
         return new Result(true, MessageConstant.EDIT_CHECKITEM_SUCCESS);
+    }
+
+    /**
+     * 5.查询所有
+     */
+    @RequestMapping("/findAll")
+    public Result findAll() {
+
+        List<CheckItem> checkItemList = checkItemService.findAll();
+        if (checkItemList != null && checkItemList.size() > 0) {
+            return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItemList);
+        }
+        return new Result(true,MessageConstant.QUERY_CHECKITEM_FAIL);
+
     }
 
 }

@@ -3,6 +3,8 @@ package com.ithuipu.dao;
 import com.github.pagehelper.Page;
 import com.ithuipu.pojo.CheckItem;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -34,4 +36,8 @@ public interface CheckItemDao {
      * 编辑
      */
     void edit(CheckItem checkItem);
+
+    /**查询所有*/
+    List<CheckItem> findAll();
+
 }

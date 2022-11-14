@@ -4,6 +4,8 @@ import com.ithuipu.entity.PageResult;
 import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.CheckItem;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -27,4 +29,8 @@ public interface CheckItemService {
 
     /**编辑*/
     void edit(CheckItem checkItem);
+
+    /**查询所有*/
+    List<CheckItem> findAll();
+
 }

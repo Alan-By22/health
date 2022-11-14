@@ -10,6 +10,8 @@ import com.ithuipu.pojo.CheckItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -69,5 +71,11 @@ public class CheckItemServiceImpl implements CheckItemService {
     @Override
     public void edit(CheckItem checkItem) {
         checkItemDao.edit(checkItem);
+    }
+
+    /**查询所有*/
+    @Override
+    public List<CheckItem> findAll() {
+        return checkItemDao.findAll();
     }
 }
