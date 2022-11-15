@@ -157,7 +157,17 @@
     </update>
     <!--维护中间表-->
     <insert id="setSetmealAndCheckGroup" parameterType="hashmap">
-        insert into t_setmeal_checkgroup(checkgroup_id,setmeal_id)
+        insert into t_setmeal_checkgroup(checkgroup_id, setmeal_id)
         values (#{checkgroup_id}, #{setmeal_id});
     </insert>
+
+    <select id="findPageByQuery" resultMap="BaseResultMap" resultType="string">
+        select
+        <include refid="Base_Column_List"/>
+        from t_setmeal
+        <if test="value !=null and value.length > 0">
+            where code= #{value} or name =#{value} or helpCode = #{value}
+        </if>
+    </select>
+
 </mapper>

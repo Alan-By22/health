@@ -2,14 +2,19 @@ package com.ithuipu.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ithuipu.constant.MessageConstant;
+import com.ithuipu.constant.RedisConstant;
+import com.ithuipu.entity.PageResult;
+import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.entity.Result;
 import com.ithuipu.pojo.Setmeal;
 import com.ithuipu.service.SetmealService;
 import com.ithuipu.utils.QiniuUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.JedisPool;
 
 import java.util.UUID;
 
@@ -31,6 +36,12 @@ public class SetmealController {
     private SetmealService setmealService;
 
     /**
+     * 从远程取出JedisPool
+     */
+    @Autowired
+    private JedisPool jedisPool;
+
+    /**
      * 图片的上传  /setmeal/upload.do
      */
     @RequestMapping("/upload")
@@ -46,6 +57,8 @@ public class SetmealController {
             String fileName = UUID.randomUUID().toString() + substring;
             //2.使用七牛云工具类
             QiniuUtils.upload2Qiniu(imgFile.getBytes(), fileName);
+            //3.将图片存入到redis数据库
+            jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_RESOURCES, fileName);
             //上传成功
             return new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS, fileName);
 
@@ -70,5 +83,13 @@ public class SetmealController {
         }
         //成功
         return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+
+    /**
+     * 分页的条件查询
+     */
+    @RequestMapping("/findByPage")
+    public PageResult findByPage(@RequestBody QueryPageBean queryPageBean) {
+        return setmealService.findByPage(queryPageBean);
     }
 }

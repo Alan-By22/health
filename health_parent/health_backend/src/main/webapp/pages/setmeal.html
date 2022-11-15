@@ -96,7 +96,7 @@
                         class="filter-item"
                         @keyup.enter.native="handleFilter"
                 ></el-input>
-                <el-button @click="findPage()" class="dalfBut">查询</el-button>
+                <el-button @click="findPage_1()" class="dalfBut">查询</el-button>
                 <el-button type="primary" class="butT" @click="handleCreate()"
                 >新建
                 </el-button
@@ -367,8 +367,24 @@
                     this.findPage();
                 })
             },
+            findPage_1() {
+                this.pagination.currentPage = 1;
+                this.findPage();
+            },
             //分页查询
             findPage() {
+                //1.封装向后台发送的数据
+                let param = {
+                    currentPage: this.pagination.currentPage,//页码
+                    pageSize: this.pagination.pageSize,//每页显示的记录数
+                    queryString: this.pagination.queryString//查询条件
+                }
+                //2.发送异步请求
+                axios.post("/setmeal/findByPage.do", param).then((response) => {
+                    //获取响应的数据
+                    this.pagination.total = response.data.total;
+                    this.dataList = response.data.rows
+                })
             },
             // 重置表单
             resetForm() {
@@ -393,6 +409,8 @@
             },
             //切换页码
             handleCurrentChange(currentPage) {
+                this.pagination.currentPage = currentPage;
+                this.findPage();
             },
         },
     });

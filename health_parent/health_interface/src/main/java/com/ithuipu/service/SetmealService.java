@@ -1,5 +1,7 @@
 package com.ithuipu.service;
 
+import com.ithuipu.entity.PageResult;
+import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.Setmeal;
 
 /**
@@ -14,4 +16,8 @@ public interface SetmealService {
      * 新增,添加
      */
     void add(Setmeal setmeal, Integer[] checkitemIds);
+
+    /**分页的条件查询*/
+    PageResult findByPage(QueryPageBean queryPageBean);
+
 }
