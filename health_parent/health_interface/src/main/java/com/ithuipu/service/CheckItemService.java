@@ -24,13 +24,19 @@ public interface CheckItemService {
      */
     PageResult findByPageAndQuery(QueryPageBean queryPageBean);
 
-    /**根据id删除*/
+    /**
+     * 根据id删除
+     */
     void delete(Integer id);
 
-    /**编辑*/
+    /**
+     * 编辑
+     */
     void edit(CheckItem checkItem);
 
-    /**查询所有*/
+    /**
+     * 查询所有
+     */
     List<CheckItem> findAll();
 
 }

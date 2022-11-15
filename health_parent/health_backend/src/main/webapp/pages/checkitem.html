@@ -322,9 +322,9 @@
         methods: {
             //编辑
             handleEdit() {
-                this.$refs['dataEditForm'].validate((valid)=>{
+                this.$refs['dataEditForm'].validate((valid) => {
                     //判断
-                    if(valid){
+                    if (valid) {
                         //1.关闭添加窗口
                         this.dialogFormVisible4Edit = false;
                         //2.异步发送请求

@@ -18,7 +18,7 @@ import java.util.List;
  * @author 11752
  * @创建人 zby
  * @创建时间 2022/11/13---18:42
- * @描述信息
+ * @描述信息    检查组管理
  */
 @RestController
 @RequestMapping("/checkgroup")
@@ -73,9 +73,9 @@ public class CheckGroupController {
      * 4.编辑
      */
     @RequestMapping("/edit")
-    public Result edit(@RequestBody CheckGroup checkGroup,Integer[] checkItemIds) {
+    public Result edit(@RequestBody CheckGroup checkGroup, Integer[] checkItemIds) {
         try {
-            checkGroupService.edit(checkGroup,checkItemIds);
+            checkGroupService.edit(checkGroup, checkItemIds);
         } catch (Exception e) {
             //编辑失败
             return new Result(false, MessageConstant.EDIT_CHECKGROUP_FAIL);
@@ -83,4 +83,18 @@ public class CheckGroupController {
         //编辑成功
         return new Result(true, MessageConstant.EDIT_CHECKGROUP_SUCCESS);
     }
+
+    /**
+     * 1.新增
+     */
+    @RequestMapping("/findAll")
+    public Result findAll() {
+        List<CheckGroup> checkGroupList = checkGroupService.findAll();
+        if (checkGroupList != null && checkGroupList.size() > 0) {
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroupList);
+        }
+        return new Result(true, MessageConstant.QUERY_CHECKGROUP_FAIL);
+
+    }
+
 }

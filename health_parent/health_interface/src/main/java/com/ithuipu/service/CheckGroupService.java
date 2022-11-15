@@ -26,11 +26,19 @@ public interface CheckGroupService {
      */
     PageResult findByPage(QueryPageBean queryPageBean);
 
-    /**查询ids*/
+    /**
+     * 查询ids
+     */
     List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 
     /**
      * 编辑
      */
     void edit(CheckGroup checkGroup, Integer[] checkItemIds);
+
+    /**
+     * 查询所有
+     */
+    List<CheckGroup> findAll();
+
 }

@@ -43,4 +43,9 @@ public interface CheckGroupDao {
      * 清理
      */
     void deleteByGroupId(CheckGroup checkGroup);
+
+    /**
+     * 查询所有
+     */
+    List<CheckGroup> findAll();
 }

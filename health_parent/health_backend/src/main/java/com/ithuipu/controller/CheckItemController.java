@@ -4,7 +4,7 @@ package com.ithuipu.controller;
  * @author 11752
  * @创建人 zby
  * @创建时间 2022/11/10---17:06
- * @描述信息
+ * @描述信息    检查项管理
  */
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -96,9 +96,9 @@ public class CheckItemController {
 
         List<CheckItem> checkItemList = checkItemService.findAll();
         if (checkItemList != null && checkItemList.size() > 0) {
-            return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItemList);
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItemList);
         }
-        return new Result(true,MessageConstant.QUERY_CHECKITEM_FAIL);
+        return new Result(true, MessageConstant.QUERY_CHECKITEM_FAIL);
 
     }
 

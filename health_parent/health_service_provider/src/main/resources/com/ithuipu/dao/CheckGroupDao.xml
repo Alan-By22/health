@@ -29,6 +29,7 @@
         from t_checkgroup_checkitem
         where checkitem_id = #{id}
     </select>
+
     <!--根据检查组id删除中间表数据（清理原有关联关系）-->
     <delete id="deleteByGroupId" parameterType="int">
         delete
@@ -60,5 +61,9 @@
         </set>
         where id = #{id}
     </update>
-
+    <!--查询所有-->
+    <select id="findAll" resultType="com.ithuipu.pojo.CheckGroup">
+        select *
+        from t_checkgroup
+    </select>
 </mapper>

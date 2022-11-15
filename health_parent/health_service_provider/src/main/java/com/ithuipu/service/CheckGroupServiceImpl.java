@@ -65,11 +65,17 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
+    /**
+     * 查询ids
+     */
     @Override
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
         return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
 
+    /**
+     * 编辑
+     */
     @Override
     public void edit(CheckGroup checkGroup, Integer[] checkItemIds) {
         //1.先修改组数据
@@ -77,6 +83,14 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         //2.清理关联关系
         checkGroupDao.deleteByGroupId(checkGroup);
         //3.建立关联联系
-        setCheckGroup_CheckItem(checkGroup.getId(),checkItemIds);
+        setCheckGroup_CheckItem(checkGroup.getId(), checkItemIds);
+    }
+
+    /**
+     * 查询所有
+     */
+    @Override
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.findAll();
     }
 }

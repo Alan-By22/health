@@ -32,12 +32,15 @@ public interface CheckItemDao {
      * 根据id来删除有没有检查项
      */
     void deleteById(Integer id);
+
     /**
      * 编辑
      */
     void edit(CheckItem checkItem);
 
-    /**查询所有*/
+    /**
+     * 查询所有
+     */
     List<CheckItem> findAll();
 
 }

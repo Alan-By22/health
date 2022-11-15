@@ -1,11 +1,13 @@
 package com.ithuipu.pojo;
 
-public class CheckItem {
+public class Setmeal {
     private Integer id;
+
+    private String name;
 
     private String code;
 
-    private String name;
+    private String helpcode;
 
     private String sex;
 
@@ -13,11 +15,11 @@ public class CheckItem {
 
     private Float price;
 
-    private String type;
+    private String remark;
 
     private String attention;
 
-    private String remark;
+    private String img;
 
     public Integer getId() {
         return id;
@@ -25,6 +27,14 @@ public class CheckItem {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public String getCode() {
@@ -35,12 +45,12 @@ public class CheckItem {
         this.code = code == null ? null : code.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getHelpcode() {
+        return helpcode;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setHelpcode(String helpcode) {
+        this.helpcode = helpcode == null ? null : helpcode.trim();
     }
 
     public String getSex() {
@@ -67,12 +77,12 @@ public class CheckItem {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public String getAttention() {
@@ -83,11 +93,11 @@ public class CheckItem {
         this.attention = attention == null ? null : attention.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getImg() {
+        return img;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 }
