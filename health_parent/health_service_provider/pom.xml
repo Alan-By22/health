@@ -24,6 +24,7 @@
         <configuration>
           <!-- 指定端口 -->
           <port>81</port>
+          <version>2.2</version>
           <!-- 请求路径 -->
           <path>/</path>
         </configuration>
