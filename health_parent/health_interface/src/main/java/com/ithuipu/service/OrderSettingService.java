@@ -3,6 +3,7 @@ package com.ithuipu.service;
 import com.ithuipu.pojo.OrderSetting;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 11752
@@ -13,6 +14,19 @@ import java.util.List;
 
 public interface OrderSettingService {
 
+    /**
+     * 添加
+     */
     void add(List<OrderSetting> list);
+
+    /**
+     * 查询
+     */
+    List<Map> getOrderSettingByMonth(String date);
+
+    /**
+     * 设置预约
+     */
+    void editOrderSettingNumber(OrderSetting orderSetting);
 
 }

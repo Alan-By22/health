@@ -6,6 +6,7 @@ import com.ithuipu.entity.Result;
 import com.ithuipu.pojo.OrderSetting;
 import com.ithuipu.service.OrderSettingService;
 import com.ithuipu.utils.POIUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 11752
@@ -48,7 +50,7 @@ public class OrderSettingController {
                     OrderSetting orderSetting = new OrderSetting(new Date(strings[0]), Integer.parseInt(strings[1]));
                     list.add(orderSetting);
                 }
-                //调用service
+                //调用service---添加
                 orderSettingService.add(list);
             }
         } catch (Exception e) {
@@ -56,7 +58,36 @@ public class OrderSettingController {
             return new Result(false, MessageConstant.IMPORT_ORDERSETTING_FAIL);
         }
         return new Result(true, MessageConstant.IMPORT_ORDERSETTING_SUCCESS);
+    }
 
+    /**
+     * 查询
+     */
+    @RequestMapping("/getOrderSettingByMonth")
+    public Result getOrderSettingByMonth(String date) {
+
+        try {
+            //1.
+            List<Map> list = orderSettingService.getOrderSettingByMonth(date);
+            //2.
+            return new Result(true, MessageConstant.QUERY_ORDER_SUCCESS, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Result(false, MessageConstant.QUERY_ORDER_FAIL);
+    }
+
+    /**
+     * 修改
+     */
+    @RequestMapping("/editOrderSettingNumber")
+    public Result editOrderSettingNumber(@RequestBody OrderSetting orderSetting) {
+        try {
+            orderSettingService.editOrderSettingNumber(orderSetting);
+            return new Result(true, MessageConstant.ORDERSETTING_SUCCESS);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.ORDERSETTING_FAIL);
+        }
     }
 
 }

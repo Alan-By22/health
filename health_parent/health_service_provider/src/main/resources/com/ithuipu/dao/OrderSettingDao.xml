@@ -20,4 +20,11 @@
             (orderDate, number, reservations)
         values (#{orderDate}, #{number}, #{reservations})
     </insert>
+
+    <select id="getOrderSettingByMonth" parameterType="string" resultType="com.ithuipu.pojo.OrderSetting">
+        select *
+        from t_ordersetting
+        where orderDate like #{date}
+    </select>
+
 </mapper>

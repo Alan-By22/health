@@ -3,6 +3,7 @@ package com.ithuipu.dao;
 import com.ithuipu.pojo.OrderSetting;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 11752
@@ -27,4 +28,9 @@ public interface OrderSettingDao {
      * 添加
      */
     void add(OrderSetting orderSetting);
+
+    /**
+     * 查询
+     */
+    List<OrderSetting> getOrderSettingByMonth(String s);
 }
