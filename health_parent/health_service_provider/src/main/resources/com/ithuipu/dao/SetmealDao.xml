@@ -17,6 +17,13 @@
         id
         , name, code, helpCode, sex, age, price, remark, attention, img
     </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap" resultType="com.ithuipu.pojo.Setmeal">
+        select
+        <include refid="Base_Column_List"/>
+        from t_setmeal
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -169,5 +176,6 @@
             where code= #{value} or name =#{value} or helpCode = #{value}
         </if>
     </select>
+
 
 </mapper>

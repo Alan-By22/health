@@ -4,6 +4,8 @@ import com.ithuipu.entity.PageResult;
 import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.Setmeal;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -20,4 +22,5 @@ public interface SetmealService {
     /**分页的条件查询*/
     PageResult findByPage(QueryPageBean queryPageBean);
 
+    List<Setmeal> findAll();
 }

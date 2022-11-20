@@ -3,6 +3,7 @@ package com.ithuipu.dao;
 import com.github.pagehelper.Page;
 import com.ithuipu.pojo.Setmeal;
 
+import java.util.List;
 import java.util.Map;
 
 public interface SetmealDao {
@@ -28,5 +29,6 @@ public interface SetmealDao {
      * 分页的条件查询
      */
     Page<Setmeal> findPageByQuery(String queryString);
-
+    /**查询所有*/
+    List<Setmeal> selectAll();
 }
