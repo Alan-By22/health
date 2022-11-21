@@ -19,8 +19,18 @@ public interface SetmealService {
      */
     void add(Setmeal setmeal, Integer[] checkitemIds);
 
-    /**分页的条件查询*/
+    /**
+     * 分页的条件查询
+     */
     PageResult findByPage(QueryPageBean queryPageBean);
 
+    /**
+     * 查询所有
+     */
     List<Setmeal> findAll();
+
+    /**
+     * 根据id查询
+     */
+    Setmeal findById(Integer id);
 }

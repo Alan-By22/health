@@ -3,6 +3,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ithuipu.dao.CheckGroupDao">
 
+    <resultMap id="findGroup_m" type="com.ithuipu.pojo.CheckGroup">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <!--关联关系-->
+        <collection
+                property="checkItems"
+                ofType="com.ithuipu.pojo.CheckItem"
+                column="id"
+                select="com.ithuipu.dao.CheckItemDao.findItemByGid"/>
+    </resultMap>
+    <select id="findGroupBySid" parameterType="int" resultMap="findGroup_m">
+        select g.*
+        from t_checkgroup g,
+             t_setmeal_checkgroup sc
+        where g.id = sc.checkgroup_id
+          and sc.setmeal_id = #{sid}
+    </select>
+
+
     <!--1.添加-->
     <insert id="add" parameterType="com.ithuipu.pojo.CheckGroup">
         /*查询最后添加的id,内置函数*/
@@ -66,4 +90,5 @@
         select *
         from t_checkgroup
     </select>
+
 </mapper>

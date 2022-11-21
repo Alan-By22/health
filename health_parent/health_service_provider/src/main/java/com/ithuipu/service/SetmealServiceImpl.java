@@ -33,7 +33,9 @@ public class SetmealServiceImpl implements SetmealService {
     @Autowired
     private SetmealDao setmealDao;
 
-    /**取jedis*/
+    /**
+     * 取jedis
+     */
     @Autowired
     private JedisPool jedisPool;
 
@@ -46,7 +48,7 @@ public class SetmealServiceImpl implements SetmealService {
             setSetmealAndCheckGroup(setmeal.getId(), checkitemIds);
         }
         //3.将添加的套餐的图片添加到redis中set集合
-        jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES,setmeal.getImg());
+        jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES, setmeal.getImg());
     }
 
     /**
@@ -55,25 +57,38 @@ public class SetmealServiceImpl implements SetmealService {
     private void setSetmealAndCheckGroup(Integer id, Integer[] checkitemIds) {
         for (Integer checkitemId : checkitemIds) {
             Map<String, Integer> map = new HashMap<>();
-            map.put("checkgroup_id",checkitemId);
-            map.put("setmeal_id",id);
+            map.put("checkgroup_id", checkitemId);
+            map.put("setmeal_id", id);
             setmealDao.setSetmealAndCheckGroup(map);
         }
     }
-    /**分页的条件查询--拦截器*/
+
+    /**
+     * 分页的条件查询--拦截器
+     */
     @Override
     public PageResult findByPage(QueryPageBean queryPageBean) {
         //设置初始条件
-        PageHelper.startPage(queryPageBean.getCurrentPage(),queryPageBean.getPageSize());
+        PageHelper.startPage(queryPageBean.getCurrentPage(), queryPageBean.getPageSize());
         //2.查询
         Page<Setmeal> page = setmealDao.findPageByQuery(queryPageBean.getQueryString());
-        return new PageResult(page.getTotal(),page.getResult());
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
-    /**查询所有*/
+    /**
+     * 查询所有
+     */
     @Override
     public List<Setmeal> findAll() {
         return setmealDao.selectAll();
+    }
+
+    /**
+     * 根据id查询
+     */
+    @Override
+    public Setmeal findById(Integer id) {
+        return setmealDao.selectByPrimaryKey(id);
     }
 
 }

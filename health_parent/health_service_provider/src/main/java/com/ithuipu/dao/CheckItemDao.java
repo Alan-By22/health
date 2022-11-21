@@ -1,6 +1,7 @@
 package com.ithuipu.dao;
 
 import com.github.pagehelper.Page;
+import com.ithuipu.pojo.CheckGroup;
 import com.ithuipu.pojo.CheckItem;
 
 import java.util.List;
@@ -43,4 +44,8 @@ public interface CheckItemDao {
      */
     List<CheckItem> findAll();
 
+    /**
+     * 根据组id查询检查项
+     */
+    List<CheckItem> findItemByGid(Integer gid);
 }

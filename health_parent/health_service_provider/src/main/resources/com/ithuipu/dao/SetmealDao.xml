@@ -13,23 +13,32 @@
         <result column="attention" property="attention" jdbcType="VARCHAR"/>
         <result column="img" property="img" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <resultMap id="findSetmealAndCheckgroup_item" type="com.ithuipu.pojo.Setmeal" extends="BaseResultMap">
+        <collection
+                property="checkGroups"
+                ofType="com.ithuipu.pojo.CheckGroup"
+                column="id"
+                select="com.ithuipu.dao.CheckGroupDao.findGroupBySid"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        id
-        , name, code, helpCode, sex, age, price, remark, attention, img
+        id, name, code, helpCode, sex, age, price, remark, attention, img
     </sql>
 
-    <select id="selectAll" resultMap="BaseResultMap" resultType="com.ithuipu.pojo.Setmeal">
-        select
-        <include refid="Base_Column_List"/>
-        from t_setmeal
-    </select>
-
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" resultMap="findSetmealAndCheckgroup_item" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from t_setmeal
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_setmeal
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from t_setmeal

@@ -48,4 +48,7 @@ public interface CheckGroupDao {
      * 查询所有
      */
     List<CheckGroup> findAll();
+
+    /**根据sid查询组信息*/
+    List<CheckGroup> findGroupBySid(Integer sid);
 }

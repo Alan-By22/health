@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ithuipu.dao.CheckItemDao">
+
+    <select id="findItemByGid" parameterType="int" resultType="com.ithuipu.pojo.CheckItem">
+        select *
+        from t_checkitem tc,
+             t_checkgroup_checkitem gc
+        where tc.id = gc.checkitem_id
+          and gc.checkgroup_id = #{gid}
+    </select>
+
     <!--新增-->
     <insert id="add" parameterType="com.ithuipu.pojo.CheckItem">
         insert into t_checkitem(code, name, sex, age, price, type, remark, attention)
@@ -64,7 +73,9 @@
 
     <!--查询所有-->
     <select id="findAll" resultType="com.ithuipu.pojo.CheckItem">
-        select * from t_checkitem
+        select *
+        from t_checkitem
     </select>
+
 
 </mapper>
