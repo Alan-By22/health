@@ -176,24 +176,40 @@
                 //1.获得手机号
                 let telephone = this.orderInfo.telephone
                 //2.校验
-                if(!checkTelephone(telephone)){
+                if (!checkTelephone(telephone)) {
                     this.$message.error("请输入正确的手机号!")
                     return false;
                 }
                 //3.点击验证码----30秒倒计时
                 validateCodeButton = $("#validateCodeButton")[0] //jquery--js
-                clock = window.setInterval(doLoop,1000); //每秒调用一次
+                clock = window.setInterval(doLoop, 1000); //每秒调用一次
                 //4.发送验证短信
                 axios.post("/validateCode/send4Order.do?telephone=" + telephone)
-                    .then((response)=>{
-                    if(response.date.flag){
-                        //发送验证码失败
-                        this.$message.error(response.date.message);
-                    }
-                })
+                    .then((response) => {
+                        if (response.date.flag) {
+                            //发送验证码失败
+                            this.$message.error(response.date.message);
+                        }
+                    })
             },
             //提交预约
             submitOrder() {
+                //1.身份证的校验
+                if (!checkIdCard(this.orderInfo.idCard)) {
+                    this.$message.error("身份证输入有误,请重新输入!")
+                    return false;
+                }
+                //2.数据合法
+                axios.post("/order/submit.do", this.orderInfo)
+                    .then((response) => {
+                        if (response.date.flag) {
+                            //预约成功
+                            window.location.href = "orderSuccess.html?orderId"+response.date.data;
+                        }else {
+                            //预约失败
+                            this.$message.error(response.date.message);
+                        }
+                    })
             },
         },
         /*vue的钩子函数*/
