@@ -72,4 +72,20 @@ public class OrderController {
         }
         return result;
     }
+
+
+    /**
+     * 根据预约的id查询,会员信息,套餐信息,预约信息
+     */
+    @RequestMapping("/findById")
+    public Result findById(Integer id) {
+        try {
+           Map map= orderService.findById(id);
+           return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.QUERY_ORDER_FAIL);
+
+        }
+    }
 }

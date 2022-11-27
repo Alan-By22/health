@@ -33,4 +33,8 @@ public interface OrderSettingDao {
      * 查询
      */
     List<OrderSetting> getOrderSettingByMonth(String s);
+
+    void editReservationsByOrderDate(OrderSetting orderSetting);
+
+    OrderSetting findByOrderDate(Date date);
 }
