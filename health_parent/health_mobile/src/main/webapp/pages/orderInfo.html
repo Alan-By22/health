@@ -174,7 +174,7 @@
             //发送验证码
             sendValidateCode() {
                 //1.获得手机号
-                let telephone = this.orderInfo.telephone
+                let telephone = this.orderInfo.telephone;
                 //2.校验
                 if (!checkTelephone(telephone)) {
                     this.$message.error("请输入正确的手机号!")
@@ -186,9 +186,9 @@
                 //4.发送验证短信
                 axios.post("/validateCode/send4Order.do?telephone=" + telephone)
                     .then((response) => {
-                        if (response.date.flag) {
+                        if (!response.data.flag) {
                             //发送验证码失败
-                            this.$message.error(response.date.message);
+                            this.$message.error(response.data.message);
                         }
                     })
             },
@@ -202,12 +202,12 @@
                 //2.数据合法
                 axios.post("/order/submit.do", this.orderInfo)
                     .then((response) => {
-                        if (response.date.flag) {
+                        if (response.data.flag) {
                             //预约成功
-                            window.location.href = "orderSuccess.html?orderId"+response.date.data;
+                            window.location.href = "orderSuccess.html?orderId"+response.data.data;
                         }else {
                             //预约失败
-                            this.$message.error(response.date.message);
+                            this.$message.error(response.data.message);
                         }
                     })
             },
@@ -216,7 +216,7 @@
         mounted() {
             axios.post("/setmeal/findById.do?id=" + id)
                 .then((response) => {
-                    this.setmeal = response.date.data
+                    this.setmeal = response.data.data
                 })
         },
     });

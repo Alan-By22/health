@@ -15,6 +15,7 @@ import redis.clients.jedis.JedisPool;
 
 import javax.swing.*;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author 11752
@@ -40,15 +41,17 @@ public class OrderController {
 
     @RequestMapping("/submit")
     public Result submitOrder(@RequestBody Map map) {
-        /**验证码的校验*/
+        //验证码的校验
         String telephone = (String) map.get("telephone");
-        /**从jedis中取出来*/
+        //从jedis中取出来
         String code_redis = jedisPool.getResource().get(telephone + RedisMessageConstant.SENDTYPE_ORDER);
-        /**获取前台传入的code*/
-        Spring validateCode = (Spring) map.get("validateCode");
-        /**判断*/
+        System.out.println(code_redis +"redis --");
+        //获取前台传入的code
+        String validateCode = (String)   map.get("validateCode");
+        System.out.println(validateCode + "前台 --");
+        //判断
         if (code_redis == null || !code_redis.equals(validateCode)) {
-            /**验证码输入错误*/
+            //验证码输入错误
             return new Result(false, MessageConstant.VALIDATECODE_ERROR);
         }
         /**2.调用预约服务*/
@@ -80,12 +83,11 @@ public class OrderController {
     @RequestMapping("/findById")
     public Result findById(Integer id) {
         try {
-           Map map= orderService.findById(id);
-           return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,map);
+            Map map= orderService.findById(id);
+            return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,map);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,MessageConstant.QUERY_ORDER_FAIL);
-
         }
     }
 }

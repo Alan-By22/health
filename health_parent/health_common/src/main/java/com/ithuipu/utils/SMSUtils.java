@@ -25,6 +25,7 @@ public class SMSUtils {
 
     public static final String TEMPLATE_SEND_ID = "1617307";   //预约模板
     public static final String TEMPLATE_SUCCESS_ID = "1617301"; //预约成功模板
+    public static final String TEMPLATE_LOGIN_ID = "1617306"; //快速登陆模板
 
     public static void sendShortMessage(String templateId, String telephone, String code) throws TencentCloudSDKException {
         /* 必要步骤：
@@ -33,7 +34,7 @@ public class SMSUtils {
          * 你也可以直接在代码中写死密钥对，但是小心不要将代码复制、上传或者分享给他人，
          * 以免泄露密钥对危及你的财产安全。
          * SecretId、SecretKey 查询: https://console.cloud.tencent.com/cam/capi */
-        Credential cred = new Credential("密钥", "密码");
+        Credential cred = new Credential("AKIDBHArLdkdKo45wb2f8QUL0VO6arvmeIiu", "1nNlvscAXheXEk6KRNUUKycLzXwZ3MTT");
 
         // 实例化一个http选项，可选，没有特殊需求可以跳过
         HttpProfile httpProfile = new HttpProfile();

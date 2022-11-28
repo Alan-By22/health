@@ -50,4 +50,30 @@ public class ValidateCodeController {
         /**5.发送成功*/
         return new Result(true, MessageConstant.SEND_VALIDATECODE_SUCCESS);
     }
+
+
+
+    /**
+     * 体检预约登陆
+     * send4Login.do?telephone
+     */
+    @RequestMapping("/send4Login")
+    public Result send4Login(String telephone) {
+        /**1.获得验证码*/
+        Integer code = ValidateCodeUtils.generateValidateCode(6);
+        /**2.短信发送*/
+        try {
+            SMSUtils.sendShortMessage(SMSUtils.TEMPLATE_LOGIN_ID, telephone, code.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
+        }
+        /**3.获取验证码*/
+        System.out.println(code + "-----------------");
+        /**4.将验证码存入redis--设置过期时间*/
+        jedisPool.getResource().setex(telephone + RedisMessageConstant.SENDTYPE_LOGIN, 300, code.toString());
+
+        /**5.发送成功*/
+        return new Result(true, MessageConstant.SEND_VALIDATECODE_SUCCESS);
+    }
 }
