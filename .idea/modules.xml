@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/health_parent/health_service_provider/health_service_provider.iml" filepath="$PROJECT_DIR$/health_parent/health_service_provider/health_service_provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis-generator/mybatis-generator.iml" filepath="$PROJECT_DIR$/mybatis-generator/mybatis-generator.iml" />
       <module fileurl="file://$PROJECT_DIR$/quartz_demo/quartz_demo.iml" filepath="$PROJECT_DIR$/quartz_demo/quartz_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springSecurityDemo/springSecurityDemo.iml" filepath="$PROJECT_DIR$/springSecurityDemo/springSecurityDemo.iml" />
     </modules>
   </component>
 </project>

@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/health_parent/health_jobs" />
     <file type="web" url="file://$PROJECT_DIR$/health_parent/health_mobile" />
     <file type="web" url="file://$PROJECT_DIR$/health_parent/health_service_provider" />
+    <file type="web" url="file://$PROJECT_DIR$/springSecurityDemo" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -12,6 +13,7 @@
         <option value="$PROJECT_DIR$/health_parent/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis-generator/pom.xml" />
         <option value="$PROJECT_DIR$/quartz_demo/pom.xml" />
+        <option value="$PROJECT_DIR$/springSecurityDemo/pom.xml" />
       </list>
     </option>
   </component>
