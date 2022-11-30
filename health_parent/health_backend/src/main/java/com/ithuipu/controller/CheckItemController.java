@@ -14,6 +14,7 @@ import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.entity.Result;
 import com.ithuipu.pojo.CheckItem;
 import com.ithuipu.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +39,9 @@ public class CheckItemController {
     /**
      * 1.添加
      */
+    @PreAuthorize("hasAuthority('CHECKITEM_ADD')")
     @RequestMapping("/add")
+
     public Result add(@RequestBody CheckItem checkItem) {
         try {
             checkItemService.add(checkItem);
@@ -51,7 +54,9 @@ public class CheckItemController {
     /**
      * 2.分页条件查询
      */
+    @PreAuthorize("hasAuthority('CHECKITEM_QUERY')")
     @RequestMapping("/findByPage")
+
     public PageResult findByPageAndQuery(@RequestBody QueryPageBean queryPageBean) {
         //1.调用service---dao
         PageResult pageResult = checkItemService.findByPageAndQuery(queryPageBean);
@@ -62,7 +67,9 @@ public class CheckItemController {
      * 3.删除
      * //checkitem/deleteById.do?id=28
      */
+    @PreAuthorize("hasAuthority('CHECKITEM_DELETE')")
     @RequestMapping("/deleteById")
+
     public Result delete(Integer id) {
         try {
             checkItemService.delete(id);
@@ -78,7 +85,9 @@ public class CheckItemController {
      * 4.修改
      * /checkitem/edit.do
      */
+    @PreAuthorize("hasAuthority('CHECKITEM_EDIT')")
     @RequestMapping("/edit")
+
     public Result edit(@RequestBody CheckItem checkItem) {
         try {
             checkItemService.edit(checkItem);

@@ -339,6 +339,10 @@
                             } else {
                                 this.$message.error(response.data.message);
                             }
+                        }).catch((r) => {
+                            // console.log(r)
+                            //权限
+                            this.showMessage(r);
                         }).finally(() => {
                             //不管添加是否成功,最终展示的就是查询
                             this.findPage();
@@ -367,6 +371,10 @@
                             } else {
                                 this.$message.error(response.data.message);
                             }
+                        }).catch((r) => {
+                            // console.log(r)
+                            //权限
+                            this.showMessage(r);
                         }).finally(() => {
                             //不管添加是否成功,最终展示的就是查询
                             this.findPage();
@@ -394,6 +402,10 @@
                     //获取响应的数据
                     this.pagination.total = response.data.total;
                     this.dataList = response.data.rows
+                }).catch((r) => {
+                    // console.log(r)
+                    //权限
+                    this.showMessage(r);
                 })
             },
             // 重置表单
@@ -414,6 +426,16 @@
                 this.formData = row;
                 //修改完后重新查一次
                 this.findPage();
+            },
+            //权限不足的方法
+            showMessage(r){
+                if (r == 'Error: Request failed with status code 403') {
+                    this.$message.error("权限不足");
+                    return;
+                } else {
+                    this.$message.error("未知错误,请联系管理员查看");
+                    return;
+                }
             },
             //切换页码
             handleCurrentChange(currentPage) {
@@ -442,6 +464,10 @@
                             //添加失败
                             this.$message.error(response.data.message);
                         }
+                    }).catch((r) => {
+                        // console.log(r)
+                        //权限
+                        this.showMessage(r);
                     })
                 }).catch(() => {
                     this.$message({

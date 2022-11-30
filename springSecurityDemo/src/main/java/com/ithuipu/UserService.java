@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
         }
         //获取密码
         String password = user.getPassword();
-        System.out.println(password);
+        System.out.println(user.getUsername()+"-------------"+password);
         //校验+赋权限
         List<GrantedAuthority> list = new ArrayList<>();
         if ("root".equals(username)){
