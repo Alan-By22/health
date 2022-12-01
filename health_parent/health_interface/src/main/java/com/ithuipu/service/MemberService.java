@@ -2,6 +2,8 @@ package com.ithuipu.service;
 
 import com.ithuipu.pojo.Member;
 
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -14,4 +16,7 @@ public interface MemberService {
 
     /**注册会员*/
     void add(Member member);
+
+    /**统计报表*/
+    List<Integer> findMemberCountByMonth(List<String> list);
 }

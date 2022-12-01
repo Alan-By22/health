@@ -7,6 +7,9 @@ import com.ithuipu.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author 11752
  * @创建人 zby
@@ -41,5 +44,17 @@ public class MemberServiceImpl implements MemberService {
             member.setPassword(MD5Utils.md5(member.getPassword()));
         }
         memberDao.add(member);
+    }
+
+    @Override
+    public List<Integer> findMemberCountByMonth(List<String> month) {
+        List<Integer> list = new ArrayList<>();
+        for (String m : month) {
+            //格式:2022.12.31
+            m = m+".31";
+            Integer count = memberDao.findMemberCountBeforeDate(m);
+            list.add(count);
+        }
+        return list;
     }
 }
