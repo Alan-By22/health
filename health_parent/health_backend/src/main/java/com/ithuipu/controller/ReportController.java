@@ -45,15 +45,17 @@ public class ReportController {
         //获得当前日期之前12个月的日期
         LocalDate localDate = LocalDate.now().plusMonths(-12);
 
+        //遍历---日期格式
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             LocalDate localDate1 = localDate.plusMonths(i);
-            list.add(localDate1.format(DateTimeFormatter.ofPattern("yyyy-MM")));
+            list.add(localDate1.format(DateTimeFormatter.ofPattern("yyyy.MM")));
         }
 
         Map<String, Object> map = new HashMap<>();
         map.put("months", list);
 
+        //会员数
         List<Integer> memberCount = memberService.findMemberCountByMonth(list);
         map.put("memberCount", memberCount);
 
