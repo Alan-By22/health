@@ -88,4 +88,20 @@ public class ReportController {
         return new Result(true, MessageConstant.GET_SETMEAL_COUNT_REPORT_SUCCESS, map);
     }
 
+    /**路径report/getBusinessReportData.do*/
+    /**
+     * 获取运营统计数据
+     */
+    @RequestMapping("/getBusinessReportData")
+    public Result getBusinessReportData() {
+        try {
+            Map<String, Object> map = reportService.getBusinessReport();
+            return new Result(true, MessageConstant.GET_BUSINESS_REPORT_SUCCESS, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.GET_BUSINESS_REPORT_FAIL);
+        }
+    }
+
+
 }
