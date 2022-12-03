@@ -5,6 +5,7 @@ import com.ithuipu.entity.QueryPageBean;
 import com.ithuipu.pojo.Setmeal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 11752
@@ -33,4 +34,10 @@ public interface SetmealService {
      * 根据id查询
      */
     Setmeal findById(Integer id);
+
+    /**
+     * 套餐数量的统计
+     */
+    List<Map<String, Object>> findSetmealCount();
+
 }

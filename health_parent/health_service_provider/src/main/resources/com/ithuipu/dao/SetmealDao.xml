@@ -22,7 +22,8 @@
                 select="com.ithuipu.dao.CheckGroupDao.findGroupBySid"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, code, helpCode, sex, age, price, remark, attention, img
+        id
+        , name, code, helpCode, sex, age, price, remark, attention, img
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="findSetmealAndCheckgroup_item" parameterType="java.lang.Integer">
@@ -184,6 +185,14 @@
         <if test="value !=null and value.length > 0">
             where code= #{value} or name =#{value} or helpCode = #{value}
         </if>
+    </select>
+
+    <!--套餐数量的统计-->
+    <select id="findSetmealCount" resultType="java.util.Map">
+        select m.name, count(o.id) value
+        from t_order o, t_setmeal m
+        where o.setmeal_id = m.id
+        group by setmeal_id
     </select>
 
 

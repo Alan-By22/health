@@ -31,4 +31,10 @@ public interface SetmealDao {
     Page<Setmeal> findPageByQuery(String queryString);
     /**查询所有*/
     List<Setmeal> selectAll();
+
+    /**
+     * 套餐数量的统计
+     */
+    List<Map<String, Object>> findSetmealCount();
+
 }

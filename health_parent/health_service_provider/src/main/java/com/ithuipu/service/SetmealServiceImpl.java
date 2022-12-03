@@ -159,4 +159,13 @@ public class SetmealServiceImpl implements SetmealService {
         return setmealDao.selectByPrimaryKey(id);
     }
 
+    /**
+     * 套餐数量的统计
+     */
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+
+        return setmealDao.findSetmealCount();
+    }
+
 }
